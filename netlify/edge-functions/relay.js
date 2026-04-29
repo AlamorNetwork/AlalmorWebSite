@@ -1,7 +1,5 @@
-// نام متغیر محیطی تغییر کرده است
 const UPSTREAM_URL = Netlify.env.get("PROXY_TARGET")?.replace(/\/+$/, "");
 
-// تغییر نام و ساختار لیست هدرهای مسدود شده
 const EXCLUDED_HEADERS = new Set([
   "host", "connection", "keep-alive", "proxy-authenticate",
   "proxy-authorization", "te", "trailer", "transfer-encoding",
@@ -9,19 +7,22 @@ const EXCLUDED_HEADERS = new Set([
   "x-forwarded-proto", "x-forwarded-port"
 ]);
 
-export default async (request) => {
-  // تغییر پیام خطای 500
+export default async (request, context) => {
+  const currentUrl = new URL(request.url);
+
+  // تغییر بسیار مهم: اگر کاربر صفحه اصلی را باز کرد، پراکسی را دور بزن و فایل index.html را نشان بده
+  if (currentUrl.pathname === "/") {
+    return context.next();
+  }
+
   if (!UPSTREAM_URL) {
     return new Response("System Error: PROXY_TARGET is missing in environment.", { status: 500 });
   }
 
-  const currentUrl = new URL(request.url);
   const destination = UPSTREAM_URL + currentUrl.pathname + currentUrl.search;
-
   const proxyHeaders = new Headers();
   let userIp = "";
 
-  // تغییر منطق کپی کردن هدرها
   for (const [headerName, headerValue] of request.headers.entries()) {
     const key = headerName.toLowerCase();
     
@@ -61,7 +62,6 @@ export default async (request) => {
       headers: responseHeaders
     });
   } catch (error) {
-    // تغییر پیام خطای 502
     return new Response("Gateway Error: Upstream connection failed.", { status: 502 });
   }
 };
