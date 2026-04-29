@@ -1,12 +1,11 @@
 {
-  "name": "netlify-xhttp-relay",
+  "name": "custom-web-gateway",
   "version": "1.0.0",
-  "description": "Netlify Edge Function HTTP relay for your own upstream service",
+  "description": "A custom edge router for web traffic",
   "private": true,
-  "license": "MIT",
   "scripts": {
     "dev": "netlify dev",
-    "build": "echo 'No build step required'"
+    "build": "echo 'Build successful'"
   },
   "devDependencies": {
     "netlify-cli": "latest"
