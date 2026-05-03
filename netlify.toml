@@ -1,7 +1,53 @@
+# ═══════════════════════════════════════════════════════════════
+# Netlify Configuration
+# Cloud API Gateway with Edge Functions
+# ═══════════════════════════════════════════════════════════════
+
 [build]
   command = "npm run build"
   publish = "public"
 
+# ─────────────────────────────────────────────────────────────
+# Edge Functions Configuration
+# ─────────────────────────────────────────────────────────────
+
+# API routes (v1)
 [[edge_functions]]
-  function = "relay"
-  path = "/*"
+  function = "handler"
+  path = "/api/v1/*"
+
+# Data routes
+[[edge_functions]]
+  function = "handler"
+  path = "/data/*"
+
+# Service routes
+[[edge_functions]]
+  function = "handler"
+  path = "/service/*"
+
+# ─────────────────────────────────────────────────────────────
+# Environment Variables (set in Netlify UI)
+# ─────────────────────────────────────────────────────────────
+# API_ENDPOINT = "https://your-backend-api.com"
+
+# ─────────────────────────────────────────────────────────────
+# Headers (security)
+# ─────────────────────────────────────────────────────────────
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# ─────────────────────────────────────────────────────────────
+# Redirects (optional)
+# ─────────────────────────────────────────────────────────────
+
+# [[redirects]]
+#   from = "/old-path/*"
+#   to = "/api/v1/:splat"
+#   status = 301
