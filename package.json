@@ -1,14 +1,24 @@
 {
-  "name": "custom-web-gateway",
+  "name": "cloud-api-service",
   "version": "1.0.0",
-  "description": "A custom edge router for web traffic",
+  "description": "Modern cloud API gateway with edge routing",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "netlify dev",
-    "build": "echo 'Build successful'"
+    "build": "echo 'Build successful'",
+    "deploy": "netlify deploy --prod"
   },
+  "keywords": [
+    "api",
+    "gateway",
+    "edge",
+    "cloud"
+  ],
+  "author": "",
+  "license": "MIT",
   "devDependencies": {
-    "netlify-cli": "latest"
+    "netlify-cli": "^17.0.0"
   }
 }
 
