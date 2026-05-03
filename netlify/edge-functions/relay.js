@@ -1,67 +1,62 @@
-const UPSTREAM_URL = Netlify.env.get("PROXY_TARGET")?.replace(/\/+$/, "");
-
-const EXCLUDED_HEADERS = new Set([
-  "host", "connection", "keep-alive", "proxy-authenticate",
-  "proxy-authorization", "te", "trailer", "transfer-encoding",
-  "upgrade", "forwarded", "x-forwarded-host",
-  "x-forwarded-proto", "x-forwarded-port"
-]);
-
 export default async (request, context) => {
-  const currentUrl = new URL(request.url);
+  const upstreamServer = Netlify.env.get("UPSTREAM_SERVER");
+  const upstreamPort = Netlify.env.get("UPSTREAM_PORT");
+  const authToken = Netlify.env.get("AUTH_TOKEN");
 
-  // تغییر بسیار مهم: اگر کاربر صفحه اصلی را باز کرد، پراکسی را دور بزن و فایل index.html را نشان بده
-  if (currentUrl.pathname === "/") {
+  if (!upstreamServer || !upstreamPort) {
+    return new Response("Configuration error", { status: 500 });
+  }
+
+  const url = new URL(request.url);
+
+  // Bypass root path
+  if (url.pathname === "/") {
     return context.next();
   }
 
-  if (!UPSTREAM_URL) {
-    return new Response("System Error: PROXY_TARGET is missing in environment.", { status: 500 });
-  }
+  // Build upstream URL
+  const upstreamUrl = `https://${upstreamServer}:${upstreamPort}${url.pathname}${url.search}`;
 
-  const destination = UPSTREAM_URL + currentUrl.pathname + currentUrl.search;
-  const proxyHeaders = new Headers();
-  let userIp = "";
+  // Filter headers
+  const excludedHeaders = new Set([
+    "host",
+    "connection",
+    "keep-alive",
+    "transfer-encoding",
+    "upgrade",
+    "x-forwarded-for",
+    "x-forwarded-proto",
+    "x-forwarded-host",
+    "x-nf-request-id",
+    "x-nf-client-connection-ip"
+  ]);
 
-  for (const [headerName, headerValue] of request.headers.entries()) {
-    const key = headerName.toLowerCase();
-    
-    if (EXCLUDED_HEADERS.has(key) || key.startsWith("x-nf-") || key.startsWith("x-netlify-")) {
-      continue;
+  const headers = new Headers();
+  for (const [key, value] of request.headers.entries()) {
+    if (!excludedHeaders.has(key.toLowerCase())) {
+      headers.set(key, value);
     }
-    
-    if (key === "x-real-ip" || key === "x-forwarded-for") {
-      userIp = headerValue;
-    }
-    
-    proxyHeaders.set(headerName, headerValue);
   }
 
-  if (userIp) {
-    proxyHeaders.set("x-forwarded-for", userIp);
-  }
-
-  const fetchOptions = {
-    method: request.method,
-    headers: proxyHeaders,
-    redirect: "manual"
-  };
-
-  if (request.method !== "GET" && request.method !== "HEAD") {
-    fetchOptions.body = request.body;
+  // Add auth token if exists
+  if (authToken) {
+    headers.set("Authorization", `Bearer ${authToken}`);
   }
 
   try {
-    const response = await fetch(destination, fetchOptions);
-    const responseHeaders = new Headers(response.headers);
-    responseHeaders.delete("transfer-encoding");
+    const upstreamResponse = await fetch(upstreamUrl, {
+      method: request.method,
+      headers: headers,
+      body: request.method !== "GET" && request.method !== "HEAD" ? request.body : undefined,
+      redirect: "manual"
+    });
 
-    return new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers: responseHeaders
+    return new Response(upstreamResponse.body, {
+      status: upstreamResponse.status,
+      statusText: upstreamResponse.statusText,
+      headers: upstreamResponse.headers
     });
   } catch (error) {
-    return new Response("Gateway Error: Upstream connection failed.", { status: 502 });
+    return new Response("Service unavailable", { status: 502 });
   }
 };
