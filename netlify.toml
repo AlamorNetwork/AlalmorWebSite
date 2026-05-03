@@ -1,40 +1,21 @@
-# ═══════════════════════════════════════════════════════════════
-# Netlify Configuration
-# Cloud API Gateway with Edge Functions
-# ═══════════════════════════════════════════════════════════════
-
 [build]
   command = "npm run build"
   publish = "public"
 
-# ─────────────────────────────────────────────────────────────
-# Edge Functions Configuration
-# ─────────────────────────────────────────────────────────────
-
-# API routes (v1)
+# هدایت مسیرهای مشخص شده به سمت اسکریپت relay
 [[edge_functions]]
-  function = "handler"
   path = "/api/v1/*"
+  function = "relay"
 
-# Data routes
 [[edge_functions]]
-  function = "handler"
   path = "/data/*"
+  function = "relay"
 
-# Service routes
 [[edge_functions]]
-  function = "handler"
   path = "/service/*"
+  function = "relay"
 
-# ─────────────────────────────────────────────────────────────
-# Environment Variables (set in Netlify UI)
-# ─────────────────────────────────────────────────────────────
-# API_ENDPOINT = "https://your-backend-api.com"
-
-# ─────────────────────────────────────────────────────────────
-# Headers (security)
-# ─────────────────────────────────────────────────────────────
-
+# تنظیم هدرهای امنیتی برای عادی جلوه دادن سایت
 [[headers]]
   for = "/*"
   [headers.values]
@@ -42,12 +23,4 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-
-# ─────────────────────────────────────────────────────────────
-# Redirects (optional)
-# ─────────────────────────────────────────────────────────────
-
-# [[redirects]]
-#   from = "/old-path/*"
-#   to = "/api/v1/:splat"
-#   status = 301
+    Server = "cloudflare" # اضافه کردن هدر جعلی سرور برای گمراه کردن سیستم‌های مانیتورینگ
