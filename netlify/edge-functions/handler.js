@@ -3,7 +3,6 @@
 // Secure edge routing with rate limiting and request validation
 // ═══════════════════════════════════════════════════════════════
 
-import { Context } from "https://edge.netlify.com";
 
 // ─────────────────────────────────────────────────────────────
 // Configuration
