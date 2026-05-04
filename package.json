@@ -1,24 +1,14 @@
 {
-  "name": "cloud-api-service",
+  "name": "nexus-api-gateway",
   "version": "1.0.0",
-  "description": "Modern cloud API gateway with edge routing",
-  "private": true,
-  "type": "module",
+  "description": "Enterprise API Edge Node",
   "scripts": {
-    "dev": "netlify dev",
-    "build": "echo 'Build successful'",
-    "deploy": "netlify deploy --prod"
+    "build": "echo 'No build step required'",
+    "dev": "netlify dev"
   },
-  "keywords": [
-    "api",
-    "gateway",
-    "edge",
-    "cloud"
-  ],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "netlify-cli": "^17.0.0"
   }
 }
+
 

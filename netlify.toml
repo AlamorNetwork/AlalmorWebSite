@@ -2,7 +2,7 @@
   command = "npm run build"
   publish = "public"
 
-# هدایت مسیرهای مشخص شده به سمت اسکریپت relay
+# هدایت ترافیک مسیرهای خاص به فایل relay.js
 [[edge_functions]]
   path = "/api/v1/*"
   function = "relay"
@@ -15,7 +15,7 @@
   path = "/service/*"
   function = "relay"
 
-# تنظیم هدرهای امنیتی برای عادی جلوه دادن سایت
+# تنظیم هدرهای سراسری برای شبیه‌سازی یک سایت واقعی و مخفی کردن هویت
 [[headers]]
   for = "/*"
   [headers.values]
@@ -23,4 +23,4 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-    Server = "cloudflare" # اضافه کردن هدر جعلی سرور برای گمراه کردن سیستم‌های مانیتورینگ
+    Server = "cloudflare"
