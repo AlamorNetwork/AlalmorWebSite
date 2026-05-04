@@ -1,250 +1,44 @@
-# Cloud API Service
+<div align="center">
 
-Modern cloud API gateway built on Netlify Edge Functions.
+# 🌌 Nexus Edge API Gateway
+**Enterprise-Grade Global Routing Network**
 
-## Features
+[![System Status](https://img.shields.io/badge/System_Status-Operational-10b981?style=for-the-badge&logo=statuspage&logoColor=white)](#)
+[![Version](https://img.shields.io/badge/Version-1.0.0--edge-38bdf8?style=for-the-badge)](#)
+[![Security](https://img.shields.io/badge/Security-Strict-ef4444?style=for-the-badge&logo=shield&logoColor=white)](#)
+[![License](https://img.shields.io/badge/License-MIT-gray?style=for-the-badge)](#)
 
-- ⚡ **Edge Routing** - Global low-latency request handling
-- 🔒 **Rate Limiting** - IP and path-based protection
-- 🛡️ **Request Validation** - Method, content-type, and size checks
-- 🎭 **Response Masking** - Natural API-like responses
-- 📊 **Request Logging** - Structured JSON logs
-- 🚀 **High Performance** - Optimized for speed
-
-## Setup
-
-### 1. Install Dependencies
-```bash
-npm install
-
-### 2. Configure Environment
-
-Set the following environment variable in Netlify UI:
-
-
-API_ENDPOINT=https://your-backend-api.com
-
-### 3. Local Development
-
-bash
-npm run dev
-
-### 4. Deploy
-
-bash
-npm run deploy
-
-## API Routes
-
-The gateway handles the following paths:
-
-- `/api/v1/*` - API version 1 endpoints
-- `/data/*` - Data service endpoints
-- `/service/*` - Service endpoints
-
-All other paths serve the static homepage.
-
-## Rate Limits
-
-- **Per IP**: 100 requests/minute
-- **Per Path**: 50 requests/minute
-- **Block Duration**: 5 minutes
-
-## Security Features
-
-- Header sanitization (removes proxy indicators)
-- Request validation (method, content-type, body size)
-- Response masking (adds natural API headers)
-- Error masking (generic error messages)
-- IP blocking for abuse
-
-## Monitoring
-
-All requests are logged in structured JSON format:
-
-json
-{
-  "timestamp": "2026-05-03T10:30:00.000Z",
-  "requestId": "req_1234567890_abc123",
-  "ip": "192.168.1.xxx",
-  "method": "GET",
-  "path": "/api/v1/users",
-  "status": 200,
-  "duration": "45ms"
-}
-
-## License
-
-MIT
-
+</div>
 
 ---
 
-### 5️⃣ **`index.html`** (بهبود یافته)
+## 🛰️ Overview
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexGen Cloud Solutions | Modern Web Infrastructure</title>
-    <meta name="description" content="Deploy fast, scale globally with NexGen Cloud Solutions. Enterprise-grade cloud infrastructure.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-800">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-blue-600">NexGen</span>
-                </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition">Features</a>
-                    <a href="#pricing" class="text-gray-700 hover:text-blue-600 transition">Pricing</a>
-                    <a href="#docs" class="text-gray-700 hover:text-blue-600 transition">Docs</a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
-                </div>
-                <div>
-                    <a href="#signup" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+**Nexus Edge** is a high-performance, globally distributed API Gateway designed for seamless and stealthy traffic routing. Built on top of advanced Edge computing infrastructure, it ensures ultra-low latency data delivery while maintaining absolute opacity regarding the upstream architecture.
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4">
-        <div class="max-w-7xl mx-auto text-center">
-            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-                Deploy fast, scale globally.
-            </h1>
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Enterprise-grade cloud infrastructure built for modern applications. 
-                Deploy in seconds, scale to millions.
-            </p>
-            <div class="flex justify-center gap-4">
-                <a href="#signup" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition">
-                    Start Free Trial
-                </a>
-                <a href="#demo" class="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition">
-                    View Demo
-                </a>
-            </div>
-        </div>
-    </section>
+Whether it's masking core microservices or handling heavy global API traffic, Nexus operates silently in the background, acting as an impenetrable and lightning-fast proxy layer.
 
-    <!-- Features Section -->
-    <section id="features" class="py-20 px-4 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16">Why Choose NexGen?</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Global Edge Network</h3>
-                    <p class="text-gray-600">Deploy to 300+ edge locations worldwide. Serve content from the closest location to your users.</p>
-                </div>
+## ✨ Core Architecture & Features
 
-                <!-- Feature 2 -->
-                <div class="p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Secure by Default</h3>
-                    <p class="text-gray-600">Enterprise-grade security with DDoS protection, SSL certificates, and automatic security updates.</p>
-                </div>
+*   🚀 **Zero-Latency Edge Routing:** Deployed on global edge nodes to ensure requests are intercepted and routed at the geographic location closest to the user.
+*   🕶️ **Stealth Proxying (Phantom Mode):** Completely sanitizes HTTP headers, stripping away proxy footprints, X-Forwarded traces, and client IP leaks. The upstream server and the client remain entirely isolated.
+*   🛡️ **Enterprise-Grade Sanitization:** Real-time request and response mutation. Error masking ensures that upstream infrastructure failures are never exposed to the end-user.
+*   ⚡ **Stream Piping:** Utilizes modern Web Streams API for chunked data transfer, meaning massive payloads are proxied with zero memory bottleneck.
+*   💠 **Glassmorphism Status Interface:** A highly polished, dark-themed operational dashboard that serves as the public-facing landing zone, maintaining a professional corporate image.
 
-                <!-- Feature 3 -->
-                <div class="p-8 bg-gray-50 rounded-xl hover:shadow-lg transition">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">High Performance</h3>
-                    <p class="text-gray-600">Lightning-fast response times with intelligent caching and optimized routing algorithms.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+## 🔒 Security Posture
 
-    <!-- Stats Section -->
-    <section class="py-20 px-4 bg-blue-600 text-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-4xl font-bold mb-2">99.99%</div>
-                    <div class="text-blue-100">Uptime SLA</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold mb-2">&lt;50ms</div>
-                    <div class="text-blue-100">Avg Response Time</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold mb-2">300+</div>
-                    <div class="text-blue-100">Edge Locations</div>
-                </div>
-                <div>
-                    <div class="text-4xl font-bold mb-2">10M+</div>
-                    <div class="text-blue-100">Requests/Day</div>
-                </div>
-            </div>
-        </div>
-    </section>
+Security is not an afterthought; it is the foundation of Nexus Edge. The gateway actively blocks reverse-engineering attempts of the API topology by enforcing:
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <span class="text-2xl font-bold text-white">NexGen</span>
-                    <p class="mt-4 text-sm">Modern cloud infrastructure for the next generation of applications.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
-                        <li><a href="#pricing" class="hover:text-white transition">Pricing</a></li>
-                        <li><a href="#docs" class="hover:text-white transition">Documentation</a></li>
-                        <li><a href="#api" class="hover:text-white transition">API Reference</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#about" class="hover:text-white transition">About Us</a></li>
-                        <li><a href="#blog" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="#careers" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#privacy" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="#terms" class="hover:text-white transition">Terms of Service</a></li>
-                        <li><a href="#security" class="hover:text-white transition">Security</a></li>
-                        <li><a href="#compliance" class="hover:text-white transition">Compliance</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 pt-8 text-center text-sm">
-                <p>&copy; 2026 NexGen Cloud Solutions. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+- **Header Obfuscation:** Automatic stripping of server identification tags.
+- **Silent Fallbacks:** Graceful error handling that mimics standard edge responses.
+- **Strict Content Policies:** Pre-configured security headers (HSTS, No-Sniff, X-Frame-Options) to drop malicious payloads before they hit the upstream target.
+
+## 🌍 Global Network Map
+
+The gateway operates dynamically across multiple regions, ensuring high availability (HA) and automatic failover. All incoming requests are authenticated and authorized at the edge, reducing the computational load on the core servers.
+
+---
+<div align="center">
+  <sub>Built for the Edge. Engineered for Stealth.</sub>
+</div>
